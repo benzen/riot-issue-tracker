@@ -10,8 +10,8 @@
     this.issues = issueStore.get()    
   }.bind(this))
 
-    selectIssue(event){
-      issueStore.trigger('selectIssue', event.item.id)
-    }
+  selectIssue(event){
+    issueStore.trigger('selectIssue', event.item.id)
+  }
   </script>
 </issue-list>
