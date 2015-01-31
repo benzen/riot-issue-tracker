@@ -8,16 +8,14 @@
   <ul>
     <li each={issue.labels}> {label} </li>
   </ul>
-  
-  this.on("mount", function(){
-    issueStore.trigger('init')
-  })
 
-  var self = this
+  <script>
+  this.on('update', function(){
+    this.issue = issueStore.getCurrentIssue()
+  }.bind(this))
+    doSomething(){
+      console.log("print something crazy on the console");
+    }
+  </script>
 
-  issueStore.on('selected_issue_changed', function(issue){
-    self.issue = issue
-    self.update()
-  })
-  
 </issue-detail>

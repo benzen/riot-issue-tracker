@@ -5,6 +5,7 @@
     <script type="text/javascript" src="lib/bootstrap.js"></script>
     <script type="text/javascript" src="lib/riot.js"></script>
     <script type="text/javascript" src="riot-issue.js"></script>
+    <script type="text/javascript" src="issue-store.js"></script>
     <link rel="stylesheet" href="css/bootstrap.css">
   </head>
   <body>
@@ -14,42 +15,7 @@
     <new-issue-modal></new-issue-modal>
 
     <script>
-      var IssueStore = function(){
-        riot.observable(this)
-        var self = this;
-        
-        self.store = [
-          {title:"Un problème dans le gui", id: 1, status:"Open"},
-          {title:"Un problème dans le backend", id: 2, status:"Closed"}
-        ]
- 
-        this.on('addIssue', function(issue){
-          self.store.push(issue)
-          self.trigger("issue_list_changed", self.store)
-        })
-
-        this.on('changeIssue', function(issue){
-          self.store = _.map(self.store, function(current_issue){ 
-            if(current_issue.id === issue.id ){
-              return issue
-            }else{
-              return current_issue
-            }
-          });
-          self.trigger("issue_list_changed", self.store)
-        })
-
-        this.on('selectIssue', function(issueId){
-            var issue = _.find(self.store, function(issue){ return issue.id === issueId })
-            self.trigger('selected_issue_changed', issue)
-        })
-        this.on('init',function(){
-            self.trigger("issue_list_changed", self.store)
-        })
-      }
-      var issueStore = new IssueStore()
       riot.mount('*')
-
     </script>
   </body>
 </html>
